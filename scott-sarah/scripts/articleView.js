@@ -2,12 +2,12 @@
 
 let articleView = {};
 
-// TODO: Where possible, refactor methods into arrow functions, including the document.ready() method at the bottom.
+// DONE: Where possible, refactor methods into arrow functions, including the document.ready() method at the bottom.
 
-// COMMENT: How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?
-// PUT YOUR RESPONSE HERE
+// DONE: How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?
+//Arrow functions do not have their own context, so "this" will inherit the context of what it was previously. Therefore a function could not be refactored to an arrow function if it relied on changing the context of "this".
 
-let populateFilters = () => {
+articleView.populateFilters = () => {
   $('article').each(function() {
     if (!$(this).hasClass('template')) {
       let val = $(this).find('address a').text();
@@ -26,7 +26,7 @@ let populateFilters = () => {
   });
 };
 
-let handleAuthorFilter = () => {
+articleView.handleAuthorFilter = () => {
   $('#author-filter').on('change', function() {
     if ($(this).val()) {
       $('article').hide();
@@ -39,7 +39,7 @@ let handleAuthorFilter = () => {
   });
 };
 
-let handleCategoryFilter = () => {
+articleView.handleCategoryFilter = () => {
   $('#category-filter').on('change', function() {
     if ($(this).val()) {
       $('article').hide();
@@ -52,7 +52,7 @@ let handleCategoryFilter = () => {
   });
 };
 
-let handleMainNav = () => {
+articleView.handleMainNav = () => {
   $('.main-nav').on('click', '.tab', function() {
     $('.tab-content').hide();
     $(`#${$(this).data('content')}`).fadeIn();
@@ -61,7 +61,7 @@ let handleMainNav = () => {
   $('.main-nav .tab:first').click();
 };
 
-let setTeasers = () => {
+articleView.setTeasers = () => {
   $('.article-body *:nth-of-type(n+2)').hide();
   $('article').on('click', 'a.read-on', function(e) {
     e.preventDefault();
@@ -79,9 +79,9 @@ let setTeasers = () => {
 };
 
 $(document).ready(() => {
-  populateFilters();
-  handleCategoryFilter();
-  handleAuthorFilter();
-  handleMainNav();
-  setTeasers();
+  articleView.populateFilters();
+  articleView.handleCategoryFilter();
+  articleView.handleAuthorFilter();
+  articleView.handleMainNav();
+  articleView.setTeasers();
 })
